@@ -4251,3 +4251,111 @@ tr:hover td {
 .flower-start-btn:hover {
   transform: scale(1.05);
 }
+
+/* ========================================================= */
+/*                   MOBILE RESPONSIVENESS                   */
+/* ========================================================= */
+
+@media (max-width: 768px) {
+  /* GLOBAL PADDINGS */
+  .page-header, .about-sections, .consultants-grid, .booking-layout, .games-grid {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  /* NAVIGATION */
+  nav {
+    padding: 0 16px;
+    height: auto;
+    min-height: 64px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .nav-links {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-top: 8px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .nav-links::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* HERO SECTION */
+  .hero-content {
+    flex-direction: column;
+    padding: 32px 16px;
+    text-align: center;
+  }
+  .hero-left {
+    text-align: center;
+    margin: 0 auto;
+  }
+  .hero-left h1 {
+    font-size: 36px;
+  }
+  .hero-left p {
+    font-size: 15px;
+    margin: 0 auto 32px auto;
+  }
+  .hero-center-logo {
+    position: relative;
+    left: 0;
+    top: 0;
+    transform: none;
+    margin-top: 32px;
+  }
+  .hero-center-logo.hovered {
+    transform: scale(1.1);
+  }
+
+  /* GRIDS TO 1 COLUMN */
+  .about-sections, .consultants-grid, .games-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  /* BOOKING LAYOUT */
+  .booking-layout {
+    grid-template-columns: 1fr;
+  }
+  .cal-grid {
+    gap: 2px;
+  }
+  .cal-day {
+    font-size: 12px;
+  }
+
+  /* GAME CONTAINERS */
+  .arcade-page-container, .tilted-page-container, .pressure-game-container, .heartbeat-game-container, .letters-page-container {
+    padding: 0 8px;
+  }
+  .arcade-wrapper, .tilted-wrapper {
+    padding: 16px;
+  }
+  .arcade-screen h2, .tilted-wrapper h2 {
+    font-size: 32px !important;
+  }
+  canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
+@media (max-width: 768px) {
+  /* Fixing Typo in Games Hub */
+  .games-hub-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+  .games-hub-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  
+  /* Make sure canvases don't stretch the screen */
+  .gameplay-canvas {
+    max-width: 100% !important;
+    height: auto !important;
+  }
+}
