@@ -22,11 +22,10 @@ import ThoughtBloom from './pages/ThoughtBloom';
 import ThoughtInvaders from './pages/ThoughtInvaders';
 import HeartbeatDrummer from './pages/HeartbeatDrummer';
 import PopPressure from './pages/PopPressure';
-import TiltedMinds from './pages/TiltedMinds';
 const App = () => {
   const { activeSection } = useApp();
   
-  const isGame = ['letters', 'bloom', 'invaders', 'heartbeat', 'pop_pressure', 'tilted_minds'].includes(activeSection);
+  const isGame = ['letters', 'bloom', 'invaders', 'heartbeat', 'pop_pressure'].includes(activeSection);
 
   return (
     <>
@@ -55,7 +54,6 @@ const App = () => {
             {activeSection === 'invaders' && <ThoughtInvaders />}
             {activeSection === 'heartbeat' && <HeartbeatDrummer />}
             {activeSection === 'pop_pressure' && <PopPressure />}
-            {activeSection === 'tilted_minds' && <TiltedMinds />}
             {activeSection === 'mybookings' && <MyBookings />}
             {activeSection === 'queries' && <Queries />}
             {activeSection === 'reachus' && <ReachUs />}

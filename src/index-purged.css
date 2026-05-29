@@ -3930,7 +3930,12 @@ tr:hover td {
   display: block;
 }
 
-
+@media screen and (max-width: 768px) {
+  .consultant-img {
+    position: relative;
+    top: 10px;
+  }
+}
 
 @media screen and (max-width: 768px) {
   /* Fix Reach Us 'Why choose us' layout */
@@ -3951,52 +3956,5 @@ tr:hover td {
   }
   .why-choose-text p {
     text-align: center !important;
-  }
-}
-
-
-
-@media screen and (max-width: 768px) {
-  .c-photo {
-    height: 300px !important;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .games-hub-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-  }
-  .game-card {
-    flex: 1 1 260px !important;
-    max-width: 320px !important;
-  }
-}
-
-@media screen and (min-width: 769px) {
-  .games-hub-grid {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    justify-content: center !important;
-    gap: 40px !important;
-    max-width: 1400px !important;
-    margin: 0 auto !important;
-  }
-  .game-card {
-    flex: 0 0 calc(33.333% - 40px) !important;
-    max-width: 420px !important;
-    min-height: 380px !important;
-  }
-  /* Make the text slightly bigger inside the cards too */
-  .game-card-content h3 {
-    font-size: 26px !important;
-  }
-  .game-card-content p {
-    font-size: 16px !important;
-  }
-  .game-card-icon {
-    height: 140px !important;
-    width: 140px !important;
   }
 }

@@ -26,13 +26,7 @@ const Consultants = () => {
               <div className="c-photo" style={{ zIndex: 5 }}>
                 <img
                   src={displayPhoto}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'top center',
-                    display: 'block'
-                  }}
+                  className="consultant-img"
                   alt={c.name}
                 />
               </div>

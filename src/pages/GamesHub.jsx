@@ -44,14 +44,6 @@ const GamesHub = () => {
       description: 'A calming 30-second mini-game to help you physically release stress by popping rising thought bubbles.',
       color: 'linear-gradient(135deg, #e0f2fe 0%, #7dd3fc 100%)',
       textColor: '#0369a1'
-    },
-    {
-      id: 'tilted_minds',
-      title: 'Tilted Minds',
-      icon: '/assets/tilted_icon.svg',
-      description: 'Find your center by physically counterbalancing the heavy weights of past regrets and future anxieties.',
-      color: 'linear-gradient(135deg, #e2e8f0 0%, #94a3b8 100%)',
-      textColor: '#1e293b'
     }
   ];
 

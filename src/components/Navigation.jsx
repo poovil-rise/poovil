@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useApp } from '../context/AppContext';
 
 const Navigation = () => {
   const { currentUser, activeSection, setActiveSection, logout } = useApp();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
+  const handleNavClick = (section) => {
+    setActiveSection(section);
+    setIsMenuOpen(false);
+  };
 
   const handleAvatarClick = () => {
     if (currentUser.name === 'Guest') {
@@ -23,57 +29,73 @@ const Navigation = () => {
           POOVIL
         </span>
       </div>
-      <div className="nav-links">
+      <div className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <button
           className={`nav-link ${activeSection === 'about' ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('about')}
+          onClick={() => handleNavClick('about')}
         >
           About
         </button>
         <button
           className={`nav-link ${activeSection === 'consultants' || activeSection === 'booking' ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('consultants')}
+          onClick={() => handleNavClick('consultants')}
         >
           Our Consultants
         </button>
         <button
           className={`nav-link ${activeSection === 'queries' ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('queries')}
+          onClick={() => handleNavClick('queries')}
         >
           Queries &amp; Response
         </button>
         <button
           className={`nav-link ${activeSection === 'reachus' ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('reachus')}
+          onClick={() => handleNavClick('reachus')}
         >
           Reach Us
         </button>
         <button
           className={`nav-link ${activeSection === 'services' ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('services')}
+          onClick={() => handleNavClick('services')}
         >
           Services
         </button>
         <button
           className={`nav-link ${activeSection === 'blog' ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('blog')}
+          onClick={() => handleNavClick('blog')}
         >
           The Clarity Space
         </button>
         <button
           className={`nav-link ${['games_hub', 'letters', 'bloom', 'invaders', 'heartbeat'].includes(activeSection) ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('games_hub')}
+          onClick={() => handleNavClick('games_hub')}
         >
           Games
         </button>
         <button
           className={`nav-link ${activeSection === 'mybookings' ? 'active-link' : ''}`}
-          onClick={() => setActiveSection('mybookings')}
+          onClick={() => handleNavClick('mybookings')}
         >
           My Bookings
         </button>
       </div>
       <div className="nav-right">
+        <button className="hamburger-btn" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--sage-dark)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            {isMenuOpen ? (
+              <>
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </>
+            ) : (
+              <>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </>
+            )}
+          </svg>
+        </button>
         <div
           className="avatar"
           id="userAvatar"
