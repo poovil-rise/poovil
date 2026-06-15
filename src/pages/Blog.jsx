@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { useSEO } from '../hooks/useSEO';
 
 const Blog = () => {
+  useSEO({
+    title: 'The Clarity Space | Mental Health Blog & Resources',
+    description: 'Read mental health and psychology articles written by expert consultants at Poovil. Find resources on anxiety management, emotional regulation, and self-care.',
+    keywords: 'mental health blog, psychology awareness, emotional regulation articles, anxiety management tips, understanding emotions, self care resources'
+  });
+
   const { db } = useApp();
   const blogsList = db.blogs || [];
   const [selectedBlog, setSelectedBlog] = useState(null);

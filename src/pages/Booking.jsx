@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useApp } from '../context/AppContext';
+import { useSEO } from '../hooks/useSEO';
 
 const Booking = () => {
+  useSEO({
+    title: 'Book a Session | Poovil Psychology',
+    description: 'Schedule your online therapy or psychological consultation session with our expert professionals at Poovil.',
+    keywords: 'book online counseling, schedule therapy session, psychologist appointment, online therapy booking, secure mental health appointment'
+  });
+
   const {
     currentUser,
     selectedConsultant,
@@ -152,6 +159,26 @@ const Booking = () => {
     slotTitle = `${mName} ${parseInt(dy)}, ${yr}`;
   }
 
+  // Helper to check if a specific time slot has already passed
+  const isSlotPast = (dateStr, timeStr) => {
+    if (!dateStr || !timeStr) return false;
+    const [year, month, day] = dateStr.split('-');
+    
+    const [time, period] = timeStr.split(' ');
+    let [hours, minutes] = time.split(':');
+    hours = parseInt(hours, 10);
+    minutes = parseInt(minutes, 10);
+    
+    if (period === 'PM' && hours !== 12) {
+      hours += 12;
+    } else if (period === 'AM' && hours === 12) {
+      hours = 0;
+    }
+    
+    const slotDate = new Date(year, month - 1, day, hours, minutes);
+    return slotDate < new Date();
+  };
+
   return (
     <div id="bookingSection" className="fade-in" style={{ paddingBottom: '48px' }}>
       <div className="page-header">
@@ -212,17 +239,20 @@ const Booking = () => {
               <div className="slots-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(130px, 1fr))', gap: '12px' }}>
                 {selectedConsultant.slots.map((slot) => {
                   const isBooked = bookedSlots.includes(slot);
+                  const isPast = isSlotPast(selectedDate, slot);
                   const isChosen = selectedSlot === slot;
+                  const isUnavailable = isBooked || isPast;
+                  
                   return (
                     <div
                       key={slot}
-                      className={`time-slot ${isBooked ? 'booked' : isChosen ? 'chosen-slot' : 'available'}`}
-                      onClick={() => !isBooked && handleSlotSelect(slot)}
-                      style={{ cursor: isBooked ? 'not-allowed' : 'pointer' }}
+                      className={`time-slot ${isUnavailable ? 'booked' : isChosen ? 'chosen-slot' : 'available'}`}
+                      onClick={() => !isUnavailable && handleSlotSelect(slot)}
+                      style={{ cursor: isUnavailable ? 'not-allowed' : 'pointer', opacity: isPast ? 0.6 : 1 }}
                     >
                       <span>{slot}</span>
-                      <span className="slot-status" style={{ color: isBooked ? 'var(--red)' : isChosen ? 'var(--sage-dark)' : 'var(--text-light)' }}>
-                        {isBooked ? 'Booked' : isChosen ? 'Selected' : 'Available'}
+                      <span className="slot-status" style={{ color: isUnavailable ? 'var(--red)' : isChosen ? 'var(--sage-dark)' : 'var(--text-light)' }}>
+                        {isBooked ? 'Booked' : isPast ? 'Passed' : isChosen ? 'Selected' : 'Available'}
                       </span>
                     </div>
                   );

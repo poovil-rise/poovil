@@ -1,8 +1,15 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
+import { useSEO } from '../hooks/useSEO';
 
 const Services = () => {
   const { setActiveSection } = useApp();
+
+  useSEO({
+    title: 'Services | Poovil Psychology & Counseling',
+    description: 'Explore Poovil\'s comprehensive therapy and counseling services, including individual therapy, CBT, stress management, and more.',
+    keywords: 'online counseling services, stress management counseling online, help for overthinking, emotional regulation therapy, student counseling, cognitive behavioral therapy, ABA therapy, online counselling service, counselling services for adults, counselling services for children and teens'
+  });
 
   const servicesList = [
     {

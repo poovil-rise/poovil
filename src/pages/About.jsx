@@ -1,9 +1,16 @@
 import React from 'react';
 import HeroCanvas from '../components/HeroCanvas';
 import { useApp } from '../context/AppContext';
+import { useSEO } from '../hooks/useSEO';
 
 const About = () => {
   const { setActiveSection } = useApp();
+
+  useSEO({
+    title: 'About Poovil | Mental Health & Psychology Initiative',
+    description: 'Learn about Poovil, a compassionate emotional wellness initiative providing safe and confidential psychological consultations.',
+    keywords: 'about poovil, emotional wellness initiative, mental health awareness, psychology team, tamil psychology initiative, confidential counseling'
+  });
 
   return (
     <div id="aboutSection" className="fade-in">

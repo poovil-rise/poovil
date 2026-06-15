@@ -1,8 +1,15 @@
 import React from 'react';
 import { useApp } from '../context/AppContext';
+import { useSEO } from '../hooks/useSEO';
 
 const Consultants = () => {
   const { consultants, setSelectedConsultant, setActiveSection } = useApp();
+
+  useSEO({
+    title: 'Consultants | Best Online Tamil Psychologists',
+    description: 'Meet our team of highly qualified and compassionate Tamil-speaking psychologists and mental health professionals at Poovil.',
+    keywords: 'best online Tamil psychologist, online psychologist consultation, qualified mental health professionals, book counseling session, Tamil therapy support'
+  });
 
   const handleSelectConsultant = (c) => {
     setSelectedConsultant(c);
