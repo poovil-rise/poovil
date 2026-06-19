@@ -23,4 +23,4 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-Sitemap: https://poovil.com/sitemap.xml
+Sitemap: https://poovil.vercel.app/sitemap.xml
