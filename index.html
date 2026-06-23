@@ -25,7 +25,12 @@
     <meta name="twitter:description" content="Poovil provides online counseling and emotional wellness support with Tamil-speaking psychologists for anxiety, stress, overthinking, exam anxiety, parenting challenges, and personal growth." />
     <meta name="twitter:image" content="https://poovil.vercel.app/assets/image_0.jpeg" />
 
-    <!-- Generative Engine Optimization (GEO) Meta Tags -->
+    <!-- Generative Engine Optimization (GEO) & Local SEO Meta Tags -->
+    <link rel="canonical" href="https://poovil.vercel.app/" />
+    <meta name="geo.region" content="IN-TN" />
+    <meta name="geo.placename" content="Chennai" />
+    <meta name="geo.position" content="13.0827;80.2707" />
+    <meta name="ICBM" content="13.0827, 80.2707" />
     <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
     <meta name="author" content="Poovil" />
     <meta name="keywords" content="online counseling, mental health counseling, Tamil psychologist, online psychologist, therapy support, anxiety treatment, stress management, overthinking help, emotional wellness, online counselling service, counselling services for adults, counselling services for children and teens" />
@@ -36,12 +41,23 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "Organization",
+          "@type": ["Organization", "MedicalClinic"],
           "@id": "https://poovil.vercel.app/#organization",
           "name": "Poovil - Bloom • Empower • Grow",
           "url": "https://poovil.vercel.app/",
           "logo": "https://poovil.vercel.app/assets/image_0.jpeg",
           "description": "Poovil is a psychology and emotional wellness initiative providing online counseling and emotional support through qualified mental health professionals. Services include anxiety support, stress management, overthinking help, exam counseling, parenting guidance, and emotional wellness programs for individuals and families.",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Chennai",
+            "addressRegion": "Tamil Nadu",
+            "addressCountry": "IN"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "13.0827",
+            "longitude": "80.2707"
+          },
           "contactPoint": {
             "@type": "ContactPoint",
             "contactType": "customer service",
