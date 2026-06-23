@@ -159,16 +159,10 @@ const LettersNeverSent = () => {
 
           <form onSubmit={handleCompleted} className="letters-form">
             <div className="letters-paper-sheet">
-              {/* Dimmed watermark text styled behind lines */}
-              <div className="letters-watermark">
-                <p>This space is for your feelings.</p>
-                <p>No scores. No judgment. Just release.</p>
-              </div>
-
               <textarea
                 value={letterText}
                 onChange={(e) => setLetterText(e.target.value)}
-                placeholder="Anger, sadness, regret, frustration, or silent wishes... write them all here. Nobody will ever read this."
+                placeholder="This space is for your feelings. No scores. No judgment. Just release. Write your unsaid words here..."
                 className="letters-textarea"
                 required
               />
