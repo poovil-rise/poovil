@@ -30,6 +30,7 @@ const Booking = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [age, setAge] = useState('');
+  const [number, setNumber] = useState('');
   const [note, setNote] = useState('');
 
   // Auto-fill details for logged-in users
@@ -38,10 +39,12 @@ const Booking = () => {
       setName(currentUser.name || '');
       setEmail(currentUser.email || '');
       setAge(currentUser.age || '');
+      setNumber(currentUser.number || '');
     } else {
       setName('');
       setEmail('');
       setAge('');
+      setNumber('');
     }
   }, [currentUser]);
 
@@ -131,7 +134,7 @@ const Booking = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!name || !email || !age) {
+    if (!name || !email || !age || !number) {
       showToast('Please fill in your details');
       return;
     }
@@ -140,7 +143,7 @@ const Booking = () => {
       return;
     }
 
-    const success = addBooking(name, email, age, note);
+    const success = addBooking(name, email, number, age, note);
     if (success) {
       // Clear forms
       setNote('');
@@ -295,6 +298,25 @@ const Booking = () => {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  style={{
+                    width: '100%',
+                    padding: '12px 16px',
+                    border: '1.5px solid var(--border)',
+                    borderRadius: '12px',
+                    fontFamily: "'DM Sans', sans-serif",
+                    fontSize: '15px',
+                    color: 'var(--text)',
+                    background: 'var(--white)',
+                    outline: 'none',
+                    marginBottom: '12px'
+                  }}
+                />
+                <label>Phone Number</label>
+                <input
+                  type="tel" 
+                  pattern="[1-9]{1}[0-9]{9}"
+                  value={number}
+                  onChange={(e) => setNumber(e.target.value)}
                   style={{
                     width: '100%',
                     padding: '12px 16px',

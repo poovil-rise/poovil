@@ -6,7 +6,7 @@ const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbytlqN_rqeb2j_T
 
 export const AppProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(() => {
-    return { id: 'guest_' + Date.now(), name: 'Guest', email: '', age: '', role: 'user' };
+    return { id: 'guest_' + Date.now(), name: 'Guest', email: '', age: '', number: '', role: 'user' };
   });
 
   const defaultBlogs = [
@@ -47,7 +47,7 @@ export const AppProvider = ({ children }) => {
         return {
           users: parsed.users || [
             { id: 'admin', email: 'admin@poovil.com', password: 'admin123', role: 'admin', name: 'Admin' },
-            { id: 'u1', email: 'test@test.com', password: 'test123', role: 'user', name: 'Demo User', age: 28 }
+            { id: 'u1', email: 'test@test.com', password: 'test123', role: 'user', name: 'Demo User', age: 28, number:1234567890 }
           ],
           bookings: parsed.bookings || [],
           blogs: parsed.blogs || defaultBlogs
@@ -59,7 +59,7 @@ export const AppProvider = ({ children }) => {
     return {
       users: [
         { id: 'admin', email: 'admin@poovil.com', password: 'admin123', role: 'admin', name: 'Admin' },
-        { id: 'u1', email: 'test@test.com', password: 'test123', role: 'user', name: 'Demo User', age: 28 }
+        { id: 'u1', email: 'test@test.com', password: 'test123', role: 'user', name: 'Demo User', age: 28, number:1234567890 }
       ],
       bookings: [],
       blogs: defaultBlogs
@@ -104,6 +104,36 @@ export const AppProvider = ({ children }) => {
       photo: '/assets/image_7.jpeg'
     }
   ]);
+
+  // Fetch bookings from Google Sheets on load
+  useEffect(() => {
+    fetch(`${APPS_SCRIPT_URL}?action=getBookings`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === 'success' && data.bookings) {
+          const fetchedBookings = data.bookings.map(b => {
+            const matchedConsultant = consultants.find(c => c.name === b.consultant);
+            return {
+              id: b.bookingId,
+              userId: b.clientEmail, // Use email to map to user since ID isn't in sheet
+              consultantId: matchedConsultant ? matchedConsultant.id : null,
+              consultantName: b.consultant,
+              date: b.date,
+              time: b.time,
+              clientName: b.clientName,
+              clientEmail: b.clientEmail,
+              clientAge: b.clientAge,
+              clientNumber: b.clientNumber,
+              note: b.issue,
+              status: b.status,
+              bookedAt: b.bookedAt
+            };
+          });
+          setDb(prev => ({ ...prev, bookings: fetchedBookings }));
+        }
+      })
+      .catch(err => console.error('Failed to fetch bookings from Sheets:', err));
+  }, [consultants]);
 
   // Sync to localstorage
   useEffect(() => {
@@ -151,6 +181,7 @@ export const AppProvider = ({ children }) => {
       password,
       role: 'user',
       name,
+      number,
       age: parseInt(age)
     };
     
@@ -163,7 +194,7 @@ export const AppProvider = ({ children }) => {
   };
 
   const logout = () => {
-    setCurrentUser({ id: 'guest_' + Date.now(), name: 'Guest', email: '', age: '', role: 'user' });
+    setCurrentUser({ id: 'guest_' + Date.now(), name: 'Guest', email: '', age: '',number: '' ,role: 'user' });
     setSelectedConsultant(null);
     setSelectedDate(null);
     setSelectedSlot(null);
@@ -177,6 +208,7 @@ export const AppProvider = ({ children }) => {
       clientName: booking.clientName,
       clientEmail: booking.clientEmail,
       clientAge: booking.clientAge,
+      clientNumber: booking.clientNumber, 
       consultant: booking.consultantName,
       date: booking.date,
       time: booking.time,
@@ -194,7 +226,7 @@ export const AppProvider = ({ children }) => {
     .catch(err => console.warn('Notification failed:', err));
   };
 
-  const addBooking = (name, email, age, note) => {
+  const addBooking = (name, email, number, age, note) => {
     if (!selectedConsultant || !selectedDate || !selectedSlot) {
       showToast('Missing booking specifications.');
       return false;
@@ -210,6 +242,7 @@ export const AppProvider = ({ children }) => {
       clientName: name,
       clientEmail: email,
       clientAge: parseInt(age),
+      clientNumber: number,
       note,
       status: 'pending',
       bookedAt: new Date().toISOString()

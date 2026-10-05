@@ -4,7 +4,7 @@ import { useApp } from '../context/AppContext';
 const MyBookings = () => {
   const { db, currentUser, setActiveSection } = useApp();
 
-  const mine = db.bookings.filter(b => b.userId === currentUser.id);
+  const mine = db.bookings.filter(b => b.userId === currentUser.id || (currentUser.email && b.clientEmail === currentUser.email));
 
   return (
     <div id="myBookingsSection" className="fade-in" style={{ padding: '32px 48px', maxWidth: '1100px', margin: '0 auto', width: '100%' }}>
